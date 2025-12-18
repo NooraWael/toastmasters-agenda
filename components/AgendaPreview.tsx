@@ -73,7 +73,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         textTransform: 'uppercase',
         fontSize: '8.5px',
         textAlign: 'center',
-        textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
@@ -157,7 +156,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         textTransform: 'uppercase',
         fontSize: '8.5px',
         textAlign: 'center',
-        textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
@@ -215,7 +213,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         textTransform: 'uppercase',
         fontSize: '8.5px',
         textAlign: 'center',
-        textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
@@ -271,7 +268,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         textTransform: 'uppercase',
         fontSize: '8.5px',
         textAlign: 'center',
-        textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
@@ -338,7 +334,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         textTransform: 'uppercase',
         fontSize: '8.5px',
         textAlign: 'center',
-        textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
@@ -569,7 +564,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3'
               }}>
@@ -619,7 +613,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3'
               }}>
@@ -691,7 +684,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3',
                 textAlign: 'center'
@@ -723,7 +715,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3',
                 textAlign: 'center'
@@ -753,7 +744,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3',
                 textAlign: 'center'
@@ -784,7 +774,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 fontStyle: 'italic',
                 textTransform: 'uppercase',
                 fontSize: '7.5px',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3',
                 textAlign: 'center'
@@ -835,7 +824,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 textTransform: 'uppercase',
                 fontSize: '8.5px',
                 textAlign: 'center',
-                textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
                 letterSpacing: '0em',
                 lineHeight: '1.3'
               }}>
@@ -897,7 +885,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
             textTransform: 'uppercase',
             fontSize: '7.5px',
             marginBottom: '3px',
-            textShadow: '0 0.5px 3.75px rgba(0,0,0,0.6)',
             color: '#f2df74',
             letterSpacing: '0em'
           }}>
