@@ -8,7 +8,7 @@ interface PreparedSpeechesEditorProps {
 }
 
 export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSpeechesEditorProps) {
-  const updateField = (field: keyof PreparedSpeechesSegment, value: any) => {
+  const updateField = <K extends keyof PreparedSpeechesSegment>(field: K, value: PreparedSpeechesSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
 
@@ -34,46 +34,47 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
     updateField('speakers', segment.speakers.filter(s => s.id !== id));
   };
 
-  const inputClass = 'w-full px-6 py-6 text-[17px] border-2 border-gray-200 rounded-none focus:outline-none focus:border-gray-400 transition-colors bg-white placeholder:text-gray-400';
-  const labelClass = 'block text-[15px] font-medium text-gray-700 mb-4';
+  const inputClass =
+    'w-full rounded-[3px] bg-[#eff2f9] px-4 py-3 text-base font-medium text-slate-900 placeholder:text-slate-500 caret-[#1a91f0] border border-transparent focus:border-[#1a91f0] focus:ring-2 focus:ring-[#1a91f0]/20 focus:outline-none transition';
+  const labelClass = 'block text-sm font-semibold text-slate-700 mb-2';
 
   return (
     <div>
-      <div className="mb-16">
+      <div className="mb-10">
         <label className={labelClass}>Start Time</label>
         <input
           type="time"
           value={segment.startTime}
           onChange={(e) => updateField('startTime', e.target.value)}
-          className="w-full max-w-sm px-6 py-6 text-[17px] border-2 border-gray-200 rounded-none focus:outline-none focus:border-gray-400 transition-colors bg-white"
+          className={`${inputClass} max-w-sm`}
         />
       </div>
 
-      <div className="border-t-2 border-gray-200 pt-16">
-        <div className="flex items-center justify-between mb-12">
-          <h3 className="text-xl font-semibold text-gray-900">Speakers</h3>
+      <div className="border-t border-slate-200 pt-10">
+        <div className="flex items-center justify-between mb-8">
+          <h3 className="text-xl font-semibold text-slate-900">Speakers</h3>
           <button
             onClick={addSpeaker}
-            className="px-8 py-4 bg-gray-900 text-white text-[15px] font-medium rounded-none hover:bg-gray-800 transition-colors"
+            className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
           >
             Add Speaker
           </button>
         </div>
         
-        <div className="space-y-12">
+        <div className="space-y-6">
           {segment.speakers.map((speaker, index) => (
-            <div key={speaker.id} className="border-2 border-gray-200 p-8">
-              <div className="flex items-center justify-between mb-8">
-                <span className="text-sm font-medium text-gray-500">Speaker {index + 1}</span>
+            <div key={speaker.id} className="rounded-xl border border-slate-200 bg-[#f7f9fc] p-6 space-y-4 shadow-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-slate-600">Speaker {index + 1}</span>
                 <button
                   onClick={() => removeSpeaker(speaker.id)}
-                  className="text-sm text-gray-500 hover:text-red-600 transition-colors font-medium"
+                  className="text-sm font-semibold text-slate-500 hover:text-red-600 transition-colors"
                 >
                   Remove
                 </button>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
                   <label className={labelClass}>Level</label>
                   <input
@@ -119,11 +120,11 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
           ))}
 
           {segment.speakers.length === 0 && (
-            <div className="text-center py-20 border-2 border-dashed border-gray-300">
-              <p className="text-gray-500 mb-6 text-[15px]">No speakers added yet</p>
+            <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
+              <p className="text-slate-500 mb-4 text-base">No speakers added yet</p>
               <button
                 onClick={addSpeaker}
-                className="px-8 py-4 bg-gray-900 text-white text-[15px] font-medium rounded-none hover:bg-gray-800 transition-colors"
+                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add First Speaker
               </button>

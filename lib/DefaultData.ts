@@ -117,7 +117,7 @@ export const defaultAgendaData: AgendaData = {
   ],
   
   clubTeam: [
-    { id: "1", role: "Club Counsellor", name: "Hana Alaqab, DTM" },
+    { id: "1", role: "Club Counsellor", name: "Mona Alaqab, DTM" },
     { id: "2", role: "Club Mentor", name: "TM Abdalrahman Nasser" },
   ],
   

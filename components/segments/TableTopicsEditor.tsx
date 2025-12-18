@@ -8,26 +8,27 @@ interface TableTopicsEditorProps {
 }
 
 export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEditorProps) {
-  const updateField = (field: keyof TableTopicsSegment, value: any) => {
+  const updateField = <K extends keyof TableTopicsSegment>(field: K, value: TableTopicsSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
 
-  const inputClass = 'w-full px-6 py-6 text-[17px] border-2 border-gray-200 rounded-none focus:outline-none focus:border-gray-400 transition-colors bg-white placeholder:text-gray-400';
-  const labelClass = 'block text-[15px] font-medium text-gray-700 mb-4';
+  const inputClass =
+    'w-full rounded-[3px] bg-[#eff2f9] px-4 py-3 text-base font-medium text-slate-900 placeholder:text-slate-500 caret-[#1a91f0] border border-transparent focus:border-[#1a91f0] focus:ring-2 focus:ring-[#1a91f0]/20 focus:outline-none transition';
+  const labelClass = 'block text-sm font-semibold text-slate-700 mb-2';
 
   return (
     <div>
-      <div className="mb-16">
+      <div className="mb-10">
         <label className={labelClass}>Start Time</label>
         <input
           type="time"
           value={segment.startTime}
           onChange={(e) => updateField('startTime', e.target.value)}
-          className="w-full max-w-sm px-6 py-6 text-[17px] border-2 border-gray-200 rounded-none focus:outline-none focus:border-gray-400 transition-colors bg-white"
+          className={`${inputClass} max-w-sm`}
         />
       </div>
 
-      <div className="mb-16">
+      <div className="mb-10">
         <label className={labelClass}>Table Topics Master</label>
         <input
           type="text"
@@ -47,7 +48,7 @@ export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEdit
           onChange={(e) => updateField('description', e.target.value)}
           rows={8}
           placeholder="Describe the Table Topics segment and guidelines..."
-          className="w-full px-6 py-6 text-[17px] border-2 border-gray-200 rounded-none focus:outline-none focus:border-gray-400 transition-colors resize-none bg-white placeholder:text-gray-400 leading-relaxed"
+          className={`${inputClass} resize-none leading-relaxed min-h-[140px]`}
         />
       </div>
     </div>

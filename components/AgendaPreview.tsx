@@ -1,7 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { AgendaData, Segment } from '@/types/agenda';
+import {
+  AgendaData,
+  Segment,
+  PreparedSpeechesSegment,
+  TableTopicsSegment,
+  BreakSegment,
+  EvaluationSegment,
+  AdjournmentSegment,
+  SegmentActivity,
+  Speaker,
+} from '@/types/agenda';
 
 interface AgendaPreviewProps {
   data: AgendaData;
@@ -28,6 +38,8 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
   };
 
   const dateInfo = formatDate(data.meetingDate);
+  const supporterName = data.clubSupporter?.trim() || '';
+  const hasSupporter = supporterName.length > 0;
   const sortedSegments = [...data.segments].sort((a, b) => a.order - b.order);
 
   // Render segment based on type
@@ -48,7 +60,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     }
   };
 
-  const renderPreparedSpeeches = (segment: any) => (
+  const renderPreparedSpeeches = (segment: PreparedSpeechesSegment) => (
     <div key={segment.id}>
       <div style={{ 
         background: 'radial-gradient(circle, #781327 0%, #3b0104 100%)',
@@ -81,7 +93,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         <div style={{ padding: '6px 8px' }}>Evaluator</div>
       </div>
       {/* Speaker Rows */}
-      {segment.speakers.map((speaker: any) => (
+      {segment.speakers.map((speaker: Speaker) => (
         <div key={speaker.id} style={{ 
           display: 'grid', 
           gridTemplateColumns: '60px 1fr 1.3fr 1fr', 
@@ -132,7 +144,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     </div>
   );
 
-  const renderTableTopics = (segment: any) => (
+  const renderTableTopics = (segment: TableTopicsSegment) => (
     <div key={segment.id}>
       <div style={{ 
         background: 'radial-gradient(circle, #781327 0%, #3b0104 100%)',
@@ -190,7 +202,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     </div>
   );
 
-  const renderBreak = (segment: any) => (
+  const renderBreak = (segment: BreakSegment) => (
     <div key={segment.id}>
       <div style={{ 
         background: 'radial-gradient(circle, #781327 0%, #3b0104 100%)',
@@ -246,7 +258,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     </div>
   );
 
-  const renderEvaluation = (segment: any) => (
+  const renderEvaluation = (segment: EvaluationSegment) => (
     <div key={segment.id}>
       <div style={{ 
         background: 'radial-gradient(circle, #781327 0%, #3b0104 100%)',
@@ -282,7 +294,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         
         {/* Right side with all activities */}
         <div>
-          {segment.activities.map((activity: any, idx: number) => (
+          {segment.activities.map((activity: SegmentActivity, idx: number) => (
             <div key={activity.id} style={{ 
               display: 'grid', 
               gridTemplateColumns: '1fr 1fr', 
@@ -313,7 +325,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     </div>
   );
 
-  const renderAdjournment = (segment: any) => (
+  const renderAdjournment = (segment: AdjournmentSegment) => (
     <div key={segment.id}>
       <div style={{ 
         background: 'radial-gradient(circle, #781327 0%, #3b0104 100%)',
@@ -330,7 +342,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
       }}>
         Meeting Adjournment {segment.startTime && `• ${formatTime(segment.startTime)}`}
       </div>
-      {segment.activities.map((activity: any, idx: number) => (
+      {segment.activities.map((activity: SegmentActivity, idx: number) => (
         <div key={activity.id} style={{ 
           display: 'grid', 
           gridTemplateColumns: '44px 1fr', 
@@ -418,14 +430,16 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                 }}>
                   {data.clubName}
                 </h1>
-                <p style={{ 
-                  fontSize: '10.5px', 
-                  color: '#000', 
-                  textTransform: 'uppercase',
-                  lineHeight: '1.15'
-                }}>
-                  Supported by<br />{data.clubSupporter}
-                </p>
+                {hasSupporter && (
+                  <p style={{ 
+                    fontSize: '10.5px', 
+                    color: '#000', 
+                    textTransform: 'uppercase',
+                    lineHeight: '1.15'
+                  }}>
+                    Supported by<br />{supporterName}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -478,7 +492,11 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
               Meeting Adjournment - {formatTime(data.endTime)}
             </div>
             <div style={{ textAlign: 'right' }}>
-              {data.clubSupporter},<br />
+              {hasSupporter && (
+                <>
+                  {supporterName},<br />
+                </>
+              )}
               {data.location}
             </div>
           </div>

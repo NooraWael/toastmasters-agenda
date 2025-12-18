@@ -48,22 +48,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#e9f2ff] via-[#f5f7fb] to-[#eef6ff] text-primary">
-      <header className="bg-white/90 backdrop-blur border-b border-gray-200 shadow-sm">
+    <div className="min-h-screen bg-[#f4f6fb] text-slate-900">
+      <header className="bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="text-2xl font-black tracking-wide text-primary uppercase">Toastmasters Agenda Generator</h1>
-              <p className="text-sm text-gray-600 mt-1">Live form and preview side by side</p>
+              <h1 className="text-2xl font-black tracking-wide text-slate-900 uppercase">Toastmasters Agenda Generator</h1>
+              <p className="text-sm text-slate-500 mt-1">Live form and preview side by side</p>
             </div>
             <div className="flex gap-3 flex-wrap justify-end">
               <button
                 onClick={handleSaveData}
-                className="px-5 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary-dark transition shadow-sm"
+                className="px-5 py-2.5 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition shadow-sm"
               >
                 Save Data
               </button>
-              <label className="px-5 py-2.5 bg-white border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition cursor-pointer shadow-sm">
+              <label className="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-lg font-semibold hover:bg-slate-900 hover:text-white transition cursor-pointer shadow-sm">
                 Load Data
                 <input
                   type="file"
@@ -74,7 +74,7 @@ export default function Home() {
               </label>
               <button
                 onClick={handleExport}
-                className="px-5 py-2.5 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition shadow-sm"
+                className="px-5 py-2.5 bg-slate-800 text-white rounded-lg font-semibold hover:bg-slate-900 transition shadow-sm"
               >
                 Print/Export PDF
               </button>
@@ -85,11 +85,11 @@ export default function Home() {
 
       <main className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 items-start">
-          <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 border border-gray-100 max-h-[calc(100vh-200px)] overflow-y-auto no-print">
+          <div className="bg-white rounded-2xl shadow-sm p-6 lg:p-8 border border-slate-200 max-h-[calc(100vh)] overflow-y-auto no-print">
             <AgendaForm data={agendaData} onChange={setAgendaData} />
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-4 lg:p-6 border border-gray-100 xl:sticky xl:top-6">
+          <div className="bg-white rounded-2xl shadow-sm p-4 lg:p-6 border border-slate-200 xl:sticky xl:top-6">
             <div ref={previewRef} className="print-content">
               <AgendaPreview data={agendaData} />
             </div>
