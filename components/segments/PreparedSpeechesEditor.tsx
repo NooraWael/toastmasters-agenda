@@ -55,7 +55,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
           <h3 className="text-xl font-semibold text-slate-900">Speakers</h3>
           <button
             onClick={addSpeaker}
-            className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+            className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
           >
             Add Speaker
           </button>
@@ -124,7 +124,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
               <p className="text-slate-500 mb-4 text-base">No speakers added yet</p>
               <button
                 onClick={addSpeaker}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add First Speaker
               </button>

@@ -379,7 +379,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
               <button
                 onClick={addExecutiveMember}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add Member
               </button>
@@ -428,7 +428,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   <p className="text-slate-500 mb-4 text-base">No members added yet</p>
                   <button
                     onClick={addExecutiveMember}
-                    className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                    className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
                     Add First Member
                   </button>
@@ -448,7 +448,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
               <button
                 onClick={addRolePlayer}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add Role
               </button>
@@ -497,7 +497,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   <p className="text-slate-500 mb-4 text-base">No roles added yet</p>
                   <button
                     onClick={addRolePlayer}
-                    className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                    className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
                     Add First Role
                   </button>
@@ -517,7 +517,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
               <button
                 onClick={addOpeningItem}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add Item
               </button>
@@ -575,7 +575,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   <p className="text-slate-500 mb-4 text-base">No items added yet</p>
                   <button
                     onClick={addOpeningItem}
-                    className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                    className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
                     Add First Item
                   </button>
@@ -600,7 +600,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                     e.target.value = '';
                   }
                 }}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors cursor-pointer shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors cursor-pointer shadow-sm"
                 defaultValue=""
               >
                 <option value="" disabled>Add Segment</option>
@@ -704,7 +704,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
               <button
                 onClick={addClubTeamMember}
-                className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
                 Add Member
               </button>
@@ -753,7 +753,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   <p className="text-slate-500 mb-4 text-base">No members added yet</p>
                   <button
                     onClick={addClubTeamMember}
-                    className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
+                    className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
                     Add First Member
                   </button>

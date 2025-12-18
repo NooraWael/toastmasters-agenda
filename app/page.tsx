@@ -84,8 +84,8 @@ export default function Home() {
       </header>
 
       <main className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6 items-start">
-          <div className="bg-white rounded-2xl shadow-sm p-6 lg:p-8 border border-slate-200 max-h-[calc(100vh)] overflow-y-auto no-print">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-1 items-start">
+          <div className="bg-white max-h-[calc(100vh)] overflow-y-auto no-print">
             <AgendaForm data={agendaData} onChange={setAgendaData} />
           </div>
 

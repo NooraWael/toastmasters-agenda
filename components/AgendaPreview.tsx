@@ -638,7 +638,6 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   padding: '5px 6px'
                 }}>
                   <div style={{ 
-                    background: '#a9b2b1', 
                     color: '#004165', 
                     padding: '2px 4px', 
                     fontWeight: 700, 

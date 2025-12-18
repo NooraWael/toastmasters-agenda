@@ -33,6 +33,12 @@ body {
   font-family: var(--font-montserrat);
 }
 
+/* Slightly wider default buttons to reduce cramped CTAs */
+button {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+
 /* Agenda preview framing */
 .agenda-wrapper {
   padding: 12px;
