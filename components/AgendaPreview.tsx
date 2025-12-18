@@ -12,12 +12,21 @@ import {
   SegmentActivity,
   Speaker,
 } from '@/types/agenda';
+import { useEffect, useState } from 'react';
 
 interface AgendaPreviewProps {
   data: AgendaData;
 }
 
 export default function AgendaPreview({ data }: AgendaPreviewProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
   const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -394,7 +403,15 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
           padding: '14px 18px 12px'
         }}>
           {/* Top row: Logo, Club Name, and Info */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: isMobile ? 'center' : 'space-between', 
+            alignItems: isMobile ? 'center' : 'flex-start', 
+            marginBottom: '10px',
+            gap: isMobile ? '12px' : '10px',
+            flexDirection: isMobile ? 'column' : 'row',
+            textAlign: isMobile ? 'center' : 'left'
+          }}>
             {/* Left: Logo and Title */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{ width: '56px', height: '56px', flexShrink: 0 }}>
@@ -433,8 +450,8 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
 
             {/* Right: Supporter Logo(s) */}
             {supporterLogo && (
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                <div style={{ width: '140px', height: '40px', flexShrink: 0 }}>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center', justifyContent: isMobile ? 'center' : 'flex-start' }}>
+                <div style={{ width: isMobile ? '120px' : '140px', height: '40px', flexShrink: 0 }}>
                   <Image 
                     src={supporterLogo} 
                     alt="Supporter Logo" 
@@ -461,28 +478,33 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
           {/* Date Info Bar */}
           <div style={{ 
             background: 'linear-gradient(90deg, #006094 0%, #014165 100%)',
-            padding: '6px 14px',
+            padding: isMobile ? '6px 10px' : '6px 14px',
             borderRadius: '2px',
             display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'space-between',
+            alignItems: isMobile ? 'center' : 'flex-start',
+            gap: isMobile ? '6px' : '0',
             fontSize: '9px',
             color: '#fff',
             letterSpacing: '0.05em',
             lineHeight: '1.4',
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
           }}>
-            <div>
+            <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
               <strong>{dateInfo.day}</strong><br />
               {dateInfo.date} {dateInfo.month} {dateInfo.year}
             </div>
-            <div style={{ textAlign: 'center' }}>
-              Meeting Commencement - {formatTime(data.startTime)}<br />
-              Meeting Adjournment - {formatTime(data.endTime)}
-            </div>
-            <div style={{ textAlign: 'right' }}>
+            {!isMobile && (
+              <div style={{ textAlign: 'center' }}>
+                Meeting Commencement - {formatTime(data.startTime)}<br />
+                Meeting Adjournment - {formatTime(data.endTime)}
+              </div>
+            )}
+            <div style={{ textAlign: isMobile ? 'center' : 'right' }}>
               {hasSupporter && (
                 <>
-                  {supporterName},<br />
+                  {supporterName}{!isMobile && ','}<br />
                 </>
               )}
               {data.location}
@@ -493,9 +515,9 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         {/* Main Content Area */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: '25% 1fr', 
-          padding: '10px 14px', 
-          gap: '10px', 
+          gridTemplateColumns: isMobile ? '1fr' : '25% 1fr', 
+          padding: isMobile ? '8px' : '10px 14px', 
+          gap: isMobile ? '8px' : '10px', 
           flex: 1 
         }}>
           
