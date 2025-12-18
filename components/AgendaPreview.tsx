@@ -38,6 +38,8 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
   };
 
   const dateInfo = formatDate(data.meetingDate);
+  const supporterLogo = data.supporterLogo?.trim() || '';
+  const clubLogo = data.clubLogo?.trim() || '';
   const supporterName = data.clubSupporter?.trim() || '';
   const hasSupporter = supporterName.length > 0;
   const sortedSegments = [...data.segments].sort((a, b) => a.order - b.order);
@@ -401,22 +403,13 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
             {/* Left: Logo and Title */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <div style={{ width: '56px', height: '56px', flexShrink: 0 }}>
-                {data.clubLogo ? (
-                  <Image src={data.clubLogo} alt="Club Logo" width={56} height={56} style={{ objectFit: 'contain' }} />
-                ) : (
-                  <div style={{ 
-                    width: '56px', 
-                    height: '56px', 
-                    background: '#fff',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '2px solid #004165'
-                  }}>
-                    <span style={{ color: '#004165', fontWeight: 900, fontSize: '18px' }}>TM</span>
-                  </div>
-                )}
+                <Image
+                  src={clubLogo || '/logo.png'}
+                  alt="Club Logo"
+                  width={56}
+                  height={56}
+                  style={{ objectFit: 'contain' }}
+                />
               </div>
               <div>
                 <h1 style={{ 
@@ -443,31 +436,31 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
               </div>
             </div>
 
-            {/* Right: Supporter Logo and Meeting Info */}
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-              {data.supporterLogo && (
-                <div style={{ width: '101px', height: '28px', flexShrink: 0 }}>
+            {/* Right: Supporter Logo(s) */}
+            {supporterLogo && (
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div style={{ width: '140px', height: '40px', flexShrink: 0 }}>
                   <Image 
-                    src={data.supporterLogo} 
+                    src={supporterLogo} 
                     alt="Supporter Logo" 
-                    width={101} 
-                    height={28} 
-                    style={{ objectFit: 'contain' }} 
+                    width={140} 
+                    height={40} 
+                    style={{ objectFit: 'contain', maxHeight: '44px', maxWidth: '160px' }} 
                   />
                 </div>
-              )}
-              <div style={{ 
-                fontSize: '10px', 
-                color: '#fff', 
-                textAlign: 'right', 
-                lineHeight: '1.35',
-                letterSpacing: '0.05em'
-              }}>
-                <div>Meeting Commencement - {formatTime(data.startTime)}</div>
-                <div>Meeting Adjournment - {formatTime(data.endTime)}</div>
-                <div style={{ marginTop: '2px' }}>{data.location}</div>
+                {clubLogo && (
+                  <div style={{ width: '70px', height: '40px', flexShrink: 0 }}>
+                    <Image
+                      src={clubLogo}
+                      alt="Club Logo Small"
+                      width={70}
+                      height={40}
+                      style={{ objectFit: 'contain', maxHeight: '44px', maxWidth: '90px' }}
+                    />
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </div>
 
           {/* Date Info Bar */}

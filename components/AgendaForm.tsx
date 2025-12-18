@@ -215,6 +215,18 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
   const sectionSubtitleClass = 'text-base text-slate-500 mb-8';
   const sectionPadding = { padding: '32px' };
   const sectionWrapperClass = 'w-full px-6 sm:px-10 lg:px-12 max-w-4xl mx-auto';
+  const handleImageUpload = (field: 'clubLogo' | 'supporterLogo', file: File | null) => {
+    if (!file) {
+      updateField(field, undefined as unknown as AgendaData[typeof field]);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      updateField(field, result as unknown as AgendaData[typeof field]);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="min-h-screen bg-[#f4f6fb]">
@@ -255,29 +267,28 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div>
-                <label className={labelClass}>Club Logo URL <span className="text-gray-400 text-sm font-normal">(optional)</span></label>
+          <div className="grid grid-cols-1 gap-8">
+            <div className="space-y-3">
+              <label className={labelClass}>Supporter Logo <span className="text-gray-400 text-sm font-normal">(optional)</span></label>
+              <div className="flex items-center gap-3">
                 <input
-                  type="text"
-                  value={data.clubLogo || ''}
-                  onChange={(e) => updateField('clubLogo', e.target.value || undefined)}
-                  className={inputClass}
-                  placeholder="https://..."
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageUpload('supporterLogo', e.target.files?.[0] || null)}
+                  className="text-sm text-slate-700"
                 />
-              </div>
-
-              <div>
-                <label className={labelClass}>Supporter Logo URL <span className="text-gray-400 text-sm font-normal">(optional)</span></label>
-                <input
-                  type="text"
-                  value={data.supporterLogo || ''}
-                  onChange={(e) => updateField('supporterLogo', e.target.value || undefined)}
-                  className={inputClass}
-                  placeholder="https://..."
-                />
+                {data.supporterLogo && (
+                  <button
+                    type="button"
+                    onClick={() => handleImageUpload('supporterLogo', null)}
+                    className="px-3 py-2 rounded-md bg-slate-200 text-slate-700 text-xs font-semibold hover:bg-slate-300 transition"
+                  >
+                    Remove
+                  </button>
+                )}
               </div>
             </div>
+          </div>
           </section>
         </div>
 
