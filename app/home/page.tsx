@@ -316,7 +316,7 @@ export default function HomeLanding() {
                 {[
                   {
                     version: "v1.0.0",
-                    date: "May 2025",
+                    date: "December 19 2025",
                     title: "Initial release",
                     detail:
                       "Agenda generator MVP with live preview, logo uploads, printable layout, and JSON import/export.",
