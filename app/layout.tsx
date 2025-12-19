@@ -9,8 +9,44 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://toasmasters-agenda.nqasim.dev"),
   title: "Toastmasters Agenda Generator",
-  description: "Professional agenda generator for Toastmasters clubs",
+  description:
+    "Generate polished Toastmasters meeting agendas in seconds. Built for clubs today, ready for multi-language and contextual agendas tomorrow.",
+  keywords: [
+    "Toastmasters",
+    "agenda generator",
+    "meeting agenda",
+    "club agenda",
+    "public speaking",
+    "toastmasters tools",
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://toasmasters-agenda.nqasim.dev",
+    title: "Toastmasters Agenda Generator",
+    siteName: "Toastmasters Agenda Generator",
+    description:
+      "Create professional Toastmasters meeting agendas quickly. Future-ready for multilingual and contextual agenda templates.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Toastmasters Agenda Generator",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Toastmasters Agenda Generator",
+    description:
+      "Build clean, printable Toastmasters meeting agendas instantly. Designed for clubs, built to grow with new templates and languages.",
+    images: ["/logo.png"],
+  },
+  alternates: {
+    canonical: "https://toasmasters-agenda.nqasim.dev",
+  },
 };
 
 export default function RootLayout({
