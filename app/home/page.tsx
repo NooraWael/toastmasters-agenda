@@ -55,6 +55,85 @@ export default function HomeLanding() {
           </div>
         </header>
 
+        {/* Quick tutorial */}
+        <section className="mb-24">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-slate-600 shadow-lg border border-white/70">
+                How it works
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-4">
+                Reuse your agenda in three simple steps
+              </h2>
+              <p className="text-lg text-slate-600 mt-3">
+                Save your data once, export a PDF, and load it next time so you only tweak what changed.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  step: "Step 1",
+                  title: "Fill in your meeting info",
+                  desc: "Add your club details, speakers, roles, and timing. Everything is editable in the live form.",
+                  icon: (
+                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M4 5h16" />
+                      <path d="M4 9h16" />
+                      <path d="M4 13h10" />
+                      <path d="M4 17h6" />
+                      <path d="M18 15v6" />
+                      <path d="M15 18h6" />
+                    </svg>
+                  ),
+                  accent: "from-[#004165] to-[#006b9f]",
+                },
+                {
+                  step: "Step 2",
+                  title: "Save & download as PDF",
+                  desc: "Use the save/export controls to keep a copy locally and grab a print-ready PDF for the meeting.",
+                  icon: (
+                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 3v12" />
+                      <path d="m8 11 4 4 4-4" />
+                      <path d="M5 21h14" />
+                    </svg>
+                  ),
+                  accent: "from-[#772432] to-[#9b3246]",
+                },
+                {
+                  step: "Step 3",
+                  title: "Load it next meeting",
+                  desc: "Import your saved data, update only what changed, and export again—no retyping needed.",
+                  icon: (
+                    <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 12a9 9 0 1 1 9 9" />
+                      <path d="m3 16 4-4-4-4" />
+                      <path d="M21 8v8" />
+                      <path d="m17 12 4-4 4 4-4 4z" />
+                    </svg>
+                  ),
+                  accent: "from-[#0ea5e9] to-[#2563eb]",
+                },
+              ].map((item) => (
+                <div
+                  key={item.step}
+                  className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70 hover:-translate-y-2 transition-all duration-200"
+                >
+                  <div
+                    className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${item.accent} text-white shadow-md`}
+                  >
+                    {item.icon}
+                  </div>
+                  <div className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-1">{item.step}</div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{item.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         
 
         {/* Who I Am Section - WITH PHOTO */}
@@ -134,19 +213,31 @@ export default function HomeLanding() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-5xl mb-5">✅</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-green-600 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Live Editor</h3>
               <p className="text-slate-600 leading-relaxed">Live agenda editor with instant preview</p>
             </div>
 
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-5xl mb-5">✅</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Custom Roles</h3>
               <p className="text-slate-600 leading-relaxed">Custom roles, speakers, evaluation teams, breaks</p>
             </div>
 
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70 hover:-translate-y-2 transition-all duration-200">
-              <div className="text-5xl mb-5">✅</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Print Ready</h3>
               <p className="text-slate-600 leading-relaxed">Print/export friendly design</p>
             </div>
@@ -166,21 +257,110 @@ export default function HomeLanding() {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70">
-              <div className="text-5xl mb-5">🌐</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z" />
+                  <path d="M2 12h20" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Multi-language</h3>
               <p className="text-slate-600 leading-relaxed">Multi-language agendas for diverse clubs</p>
             </div>
 
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70">
-              <div className="text-5xl mb-5">🏆</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M8 21h8" />
+                  <path d="M12 17v4" />
+                  <path d="M7 4h10" />
+                  <path d="M17 4v4a5 5 0 0 1-5 5 5 5 0 0 1-5-5V4" />
+                  <path d="M3 4h4v4a5 5 0 0 1-5-5v0" />
+                  <path d="M17 4h4v0a5 5 0 0 1-5 5v0" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Contest Templates</h3>
               <p className="text-slate-600 leading-relaxed">Contest / training / workshop templates</p>
             </div>
 
             <div className="rounded-[28px] bg-white/85 p-8 sm:p-10 shadow-[14px_14px_32px_rgba(0,0,0,0.08),-12px_-12px_28px_rgba(255,255,255,0.9)] border border-white/70">
-              <div className="text-5xl mb-5">🧠</div>
+              <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-500 text-white shadow-md">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 3a6 6 0 0 0-6 6v1.5a3.5 3.5 0 0 0 0 7V18a3 3 0 0 0 3 3h1" />
+                  <path d="M12 3a6 6 0 0 1 6 6v1.5a3.5 3.5 0 0 1 0 7V18a3 3 0 0 1-3 3h-1" />
+                </svg>
+              </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Smart Flows</h3>
               <p className="text-slate-600 leading-relaxed">Context-aware flows to reduce manual input</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Version Roadmap */}
+        <section className="mb-24">
+          <div className="max-w-5xl mx-auto space-y-6">
+            <div className="text-center space-y-2">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/80 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.2em] text-slate-600 shadow-lg border border-white/70">
+                Version Control · Roadmap
+              </div>
+              <h3 className="text-3xl sm:text-4xl font-black text-slate-900">Release timeline</h3>
+              <p className="text-slate-600">Track what shipped and what&apos;s coming next.</p>
+            </div>
+
+            <div className="relative pl-6">
+              <span className="absolute left-2 top-0 bottom-0 w-px bg-slate-200" aria-hidden />
+              <div className="space-y-6">
+                {[
+                  {
+                    version: "v1.0.0",
+                    date: "May 2025",
+                    title: "Initial release",
+                    detail:
+                      "Agenda generator MVP with live preview, logo uploads, printable layout, and JSON import/export.",
+                    status: "released",
+                  },
+                  {
+                    version: "v1.1.0",
+                    date: "Planned",
+                    title: "Multilingual & contest templates",
+                    detail:
+                      "Add language toggles plus contest/training/workshop agenda variants for clubs with specialized events.",
+                    status: "planned",
+                  },
+                  {
+                    version: "v1.2.0",
+                    date: "Planned",
+                    title: "Smart automations",
+                    detail:
+                      "Context-aware defaults, faster role assignment, and timeline helpers to reduce manual input.",
+                    status: "planned",
+                  },
+                ].map((item) => {
+                  const isReleased = item.status === "released";
+                  return (
+                    <div key={item.version} className="relative">
+                      <div
+                        className={`absolute -left-[18px] top-2 h-3 w-3 rounded-full ${isReleased ? "bg-[#004165] shadow" : "bg-slate-300"}`}
+                        aria-hidden
+                      />
+                      <div
+                        className={`rounded-2xl p-5 shadow-[12px_12px_28px_rgba(0,0,0,0.08),-10px_-10px_24px_rgba(255,255,255,0.9)] border border-white/70 ${
+                          isReleased ? "bg-white/90" : "bg-white/70 opacity-75"
+                        }`}
+                      >
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                          <span className={`text-sm font-semibold ${isReleased ? "text-[#004165]" : "text-slate-500"}`}>
+                            {item.version}
+                          </span>
+                          <span className="text-sm text-slate-500">{item.date}</span>
+                        </div>
+                        <h4 className={`text-lg font-bold ${isReleased ? "text-slate-900" : "text-slate-500"}`}>{item.title}</h4>
+                        <p className={`leading-relaxed ${isReleased ? "text-slate-600" : "text-slate-500"}`}>{item.detail}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
