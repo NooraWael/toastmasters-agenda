@@ -85,11 +85,12 @@ export default function AgendaPage() {
 
       <main className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-1 items-start">
-          <div className="bg-white max-h-[calc(100vh)] overflow-y-auto no-print">
+          <div className="bg-white max-h-[calc(100vh-120px)] overflow-y-auto no-print">
             <AgendaForm data={agendaData} onChange={setAgendaData} />
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm p-4 lg:p-6 border border-slate-200 xl:sticky xl:top-6">
+          {/* Updated preview container with proper scrolling */}
+          <div className="bg-white rounded-2xl shadow-sm p-4 lg:p-6 border border-slate-200 xl:sticky xl:top-6 max-h-[calc(100vh-120px)] overflow-y-auto">
             <div ref={previewRef} className="print-content">
               <AgendaPreview data={agendaData} />
             </div>
@@ -116,6 +117,25 @@ export default function AgendaPage() {
           .no-print {
             display: none !important;
           }
+        }
+
+        /* Custom scrollbar for preview */
+        .overflow-y-auto::-webkit-scrollbar {
+          width: 8px;
+        }
+        
+        .overflow-y-auto::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 4px;
+        }
+        
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 4px;
+        }
+        
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
         }
       `}</style>
     </div>

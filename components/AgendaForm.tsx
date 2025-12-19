@@ -214,7 +214,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
   const sectionTitleClass = 'text-2xl font-semibold text-slate-900 mb-2';
   const sectionSubtitleClass = 'text-base text-slate-500 mb-8';
   const sectionPadding = { padding: '32px' };
-  const sectionWrapperClass = 'w-full px-6 sm:px-10 lg:px-12 max-w-4xl mx-auto';
+  const sectionWrapperClass = 'w-full max-w-4xl mx-auto';
   const handleImageUpload = (field: 'clubLogo' | 'supporterLogo', file: File | null) => {
     if (!file) {
       updateField(field, undefined as unknown as AgendaData[typeof field]);
@@ -230,13 +230,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
   return (
     <div className="min-h-screen bg-[#f4f6fb]">
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 py-16 flex flex-col gap-20">
-        {/* Header */}
-        <div className="space-y-2">
-          <h1 className="text-4xl font-semibold text-slate-900">Agenda Builder</h1>
-          <p className="text-base text-slate-500">Create your Toastmasters meeting agenda</p>
-        </div>
-
+      <div className="max-w-5xl mx-auto  sm:px-10 py-2 flex flex-col gap-20">
         {/* Club Information */}
         <div className={sectionWrapperClass}>
           <section className={sectionClass} style={sectionPadding}>

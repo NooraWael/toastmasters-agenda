@@ -15,29 +15,25 @@
   --page-ink: #0f1f2b;
 }
 
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
+  margin: 0;
   font-family: var(--font-montserrat);
-  background: radial-gradient(circle at 20% 20%, #f0f6ff, transparent 30%), radial-gradient(circle at 80% 0%, #eef2ff, transparent 35%), var(--page-bg);
   color: var(--page-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .font-montserrat {
   font-family: var(--font-montserrat);
 }
 
-/* Slightly wider default buttons to reduce cramped CTAs */
-button {
-  padding-left: 1.5rem !important;
-  padding-right: 1.5rem !important;
-}
 
 /* Agenda preview framing */
 .agenda-wrapper {
