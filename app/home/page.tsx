@@ -55,32 +55,7 @@ export default function HomeLanding() {
           </div>
         </header>
 
-        {/* Quick Features Snapshot */}
-        <section className="mb-24">
-          <div className="max-w-5xl mx-auto rounded-[32px] bg-white/80 p-10 sm:p-12 shadow-[18px_18px_40px_rgba(0,0,0,0.12),-18px_-18px_40px_rgba(255,255,255,0.9)] border border-white/70">
-            <div className="text-sm font-bold text-slate-600 uppercase tracking-[0.15em] mb-8 text-center">
-              Snapshot
-            </div>
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-[8px_8px_24px_rgba(0,0,0,0.08),-8px_-8px_24px_rgba(255,255,255,0.8)] border border-white/60">
-                <span className="text-2xl">🚀</span>
-                <span>Generate, tweak, and print in minutes.</span>
-              </div>
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-[8px_8px_24px_rgba(0,0,0,0.08),-8px_-8px_24px_rgba(255,255,255,0.8)] border border-white/60">
-                <span className="text-2xl">🖨️</span>
-                <span>Print-ready layouts honoring Toastmasters style.</span>
-              </div>
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-[8px_8px_24px_rgba(0,0,0,0.08),-8px_-8px_24px_rgba(255,255,255,0.8)] border border-white/60">
-                <span className="text-2xl">🧭</span>
-                <span>Built by a club President who runs meetings weekly.</span>
-              </div>
-              <div className="inline-flex items-center gap-3 rounded-full bg-white/70 px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-[8px_8px_24px_rgba(0,0,0,0.08),-8px_-8px_24px_rgba(255,255,255,0.8)] border border-white/60">
-                <span className="text-2xl">🤝</span>
-                <span>Open source—help shape what&apos;s next.</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Who I Am Section - WITH PHOTO */}
         <section className="mb-24">
@@ -93,7 +68,7 @@ export default function HomeLanding() {
                   <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-[28px] overflow-hidden shadow-[14px_14px_32px_rgba(0,0,0,0.15),-12px_-12px_28px_rgba(255,255,255,0.9)] border-[6px] border-white/70">
                     {/* Replace this src with your actual photo path */}
                     <img 
-                      src="/api/placeholder/400/400" 
+                      src="/noora.jpg" 
                       alt="Noora - President of Reboot Toastmasters"
                       className="w-full h-full object-cover"
                     />
@@ -119,7 +94,7 @@ export default function HomeLanding() {
                 <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
                   President of <strong className="text-[#004165]">Reboot Toastmasters</strong>. I built this toolkit to remove 
                   the grunt work of crafting meeting agendas, so club leaders can focus on what 
-                  really matters—helping members grow.
+                  really matters, helping members grow.
                 </p>
                 
                 <p className="text-lg sm:text-xl text-slate-600 leading-relaxed">
