@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomeLanding() {
@@ -145,11 +146,13 @@ export default function HomeLanding() {
               <div className="flex justify-center lg:justify-start">
                 <div className="relative">
                   <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-[28px] overflow-hidden shadow-[14px_14px_32px_rgba(0,0,0,0.15),-12px_-12px_28px_rgba(255,255,255,0.9)] border-[6px] border-white/70">
-                    {/* Replace this src with your actual photo path */}
-                    <img 
-                      src="/noora.jpg" 
+                    <Image
+                      src="/noora.jpg"
                       alt="Noora - President of Reboot Toastmasters"
+                      width={320}
+                      height={320}
                       className="w-full h-full object-cover"
+                      priority
                     />
                   </div>
                   {/* Decorative badge */}
