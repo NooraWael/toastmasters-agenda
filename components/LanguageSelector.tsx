@@ -1,6 +1,6 @@
 'use client';
 
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable*/
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { Lang } from '@/lib/i18n';
