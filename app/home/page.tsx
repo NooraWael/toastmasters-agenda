@@ -1,10 +1,85 @@
+'use client';
 import Image from "next/image";
+
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function HomeLanding() {
+  const [supportOpen, setSupportOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_20%_20%,rgba(0,65,101,0.08),transparent_30%),radial-gradient(circle_at_70%_0%,rgba(119,36,50,0.08),transparent_35%),linear-gradient(135deg,#e7ecff,#f7f9ff)] text-slate-900">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 py-12 lg:py-20">
+      {/* Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 py-3 flex items-center justify-between">
+          <div className="text-base sm:text-lg font-black tracking-wide text-[#004165] uppercase">
+            Toastmasters Agenda Toolkit
+          </div>
+          {/* Desktop links */}
+          <div className="hidden sm:flex items-center gap-5 text-sm font-semibold text-slate-700">
+            <Link href="/agenda" className="hover:text-[#004165] transition">
+              Agenda Generator
+            </Link>
+            <span className="text-slate-500">Templates (in progress)</span>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setSupportOpen(true);
+              }}
+              className="hover:text-[#004165] transition"
+            >
+              Support / Feedback
+            </a>
+            <a
+              href="https://github.com/NooraWael/toastmasters-agenda"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#004165] transition"
+            >
+              GitHub
+            </a>
+          </div>
+          {/* Mobile menu */}
+          <details className="sm:hidden relative">
+            <summary className="list-none cursor-pointer flex items-center gap-2 text-slate-700">
+              <span className="sr-only">Menu</span>
+              <div className="space-y-1">
+                <span className="block h-0.5 w-6 bg-slate-800"></span>
+                <span className="block h-0.5 w-6 bg-slate-800"></span>
+                <span className="block h-0.5 w-6 bg-slate-800"></span>
+              </div>
+            </summary>
+            <div className="absolute right-0 mt-3 w-48 rounded-2xl bg-white border border-slate-200 shadow-lg p-3 space-y-2 text-sm font-semibold text-slate-700">
+              <Link href="/agenda" className="block px-2 py-1 rounded hover:bg-slate-50">
+                Agenda Generator
+              </Link>
+              <span className="block px-2 py-1 rounded text-slate-500">Templates (in progress)</span>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSupportOpen(true);
+                }}
+                className="block px-2 py-1 rounded hover:bg-slate-50"
+              >
+                Support / Feedback
+              </a>
+              <a
+                href="https://github.com/NooraWael/toastmasters-agenda"
+                target="_blank"
+                rel="noreferrer"
+                className="block px-2 py-1 rounded hover:bg-slate-50"
+              >
+                GitHub
+              </a>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 pt-28 pb-12 lg:pb-20">
         
         {/* Hero Section */}
         <header className="mb-24">
@@ -399,6 +474,63 @@ export default function HomeLanding() {
             </div>
           </div>
         </section>
+
+        {supportOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+            <div className="w-full max-w-lg rounded-3xl bg-white shadow-2xl border border-slate-200 p-8 space-y-6">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                    Community
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 mt-1">Your thoughts are important</h3>
+                  <p className="text-slate-600 text-sm mt-2">
+                    Share feedback, request features, or just say hi. I’m building this with the Toastmasters community.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSupportOpen(false)}
+                  className="text-slate-400 hover:text-slate-700 transition"
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="space-y-3 text-sm text-slate-700">
+                <div className="font-semibold text-slate-900">What helps most</div>
+                <ul className="space-y-2">
+                  <li>• Bugs or glitches you noticed</li>
+                  <li>• Feature ideas to make agendas smoother</li>
+                  <li>• Language/translation help for future locales</li>
+                  <li>• Collaboration offers from fellow Toastmasters</li>
+                </ul>
+              </div>
+
+              <div className="space-y-3">
+                <a
+                  href="https://github.com/NooraWael/toastmasters-agenda/issues/new"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-full text-center rounded-full bg-[#004165] px-6 py-3 text-white font-semibold shadow-sm hover:-translate-y-0.5 transition"
+                >
+                  Open a GitHub issue
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/nooraqasim"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-full text-center rounded-full bg-white/80 px-6 py-3 text-slate-800 font-semibold border border-slate-200 shadow-sm hover:-translate-y-0.5 transition"
+                >
+                  Connect on LinkedIn
+                </a>
+                <div className="text-center text-sm text-slate-500">
+                  Prefer email? <a className="font-semibold text-[#004165]" href="mailto:nooraqasimwork@gmail.com">nooraqasimwork@gmail.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
     </div>
