@@ -5,10 +5,12 @@ import AgendaForm from '@/components/AgendaForm';
 import AgendaPreview from '@/components/AgendaPreview';
 import { defaultAgendaData } from '@/lib/DefaultData';
 import { AgendaData } from '@/types/agenda';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AgendaPage() {
   const [agendaData, setAgendaData] = useState<AgendaData>(defaultAgendaData);
   const previewRef = useRef<HTMLDivElement>(null);
+  const { lang, isRTL } = useLanguage();
 
   const handleExport = () => {
     if (typeof window !== 'undefined') {
@@ -48,7 +50,7 @@ export default function AgendaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4f6fb] text-slate-900">
+    <div className="min-h-screen bg-[#f4f6fb] text-slate-900" dir={isRTL ? 'rtl' : 'ltr'}>
       <header className="bg-white border-b border-slate-200 shadow-sm">
         <div className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
@@ -84,15 +86,15 @@ export default function AgendaPage() {
       </header>
 
       <main className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-1 items-start">
+          <div className="agenda-grid grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-1 items-start" dir={isRTL ? 'rtl' : 'ltr'}>
           <div className="bg-white max-h-[calc(100vh-120px)] overflow-y-auto no-print">
-            <AgendaForm data={agendaData} onChange={setAgendaData} />
+            <AgendaForm data={agendaData} onChange={setAgendaData} lang={lang} />
           </div>
 
           {/* Updated preview container with proper scrolling */}
           <div className="bg-white rounded-2xl shadow-sm p-4 lg:p-6 border border-slate-200 xl:sticky xl:top-6 max-h-[calc(100vh-120px)] overflow-y-auto">
-            <div ref={previewRef} className="print-content">
-              <AgendaPreview data={agendaData} />
+            <div ref={previewRef} className="print-content" dir={isRTL ? 'rtl' : 'ltr'}>
+              <AgendaPreview data={agendaData} lang={lang} />
             </div>
           </div>
         </div>

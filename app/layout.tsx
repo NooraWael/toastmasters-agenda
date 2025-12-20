@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
+import LanguageSelector from "@/components/LanguageSelector";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -60,7 +62,10 @@ export default function RootLayout({
     <Analytics />
     <html lang="en">
       <body className={`${montserrat.className} ${montserrat.variable} font-montserrat antialiased`}>
-        {children}
+        <LanguageProvider>
+          <LanguageSelector />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
     </>
