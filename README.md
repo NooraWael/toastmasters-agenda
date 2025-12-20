@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Toastmasters Agenda Toolkit
 
-## Getting Started
+A Next.js app for generating polished Toastmasters meeting agendas with live preview, print/PDF export, and reusable data. Includes a landing page, agenda builder, and basic multilingual support (English/Arabic).
 
-First, run the development server:
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## App structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/` – Landing page (English only, sticky navbar, support modal).
+- `/agenda` – Agenda generator with live form + preview and print-friendly layout.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- Live agenda editor with side-by-side preview.
+- Save/load agenda data as JSON; print/export to PDF.
+- Supporter logo upload; club logo fallback to `/public/logo.png`.
+- Multilingual labels: English and Arabic (RTL). Language picker is available on the agenda page; home stays English.
+- Responsive layout; preview adapts for mobile.
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` – Start dev server.
+- `npm run build` – Production build.
+- `npm run start` – Start built app.
+- `npm run lint` – Lint with ESLint.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech stack
 
-## Deploy on Vercel
+- Next.js (App Router), React, TypeScript
+- Tailwind utilities via `@import "tailwindcss";`
+- Vercel Analytics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Translations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- English (default)
+- Arabic (RTL)
+- Hindi dictionary scaffold exists but is currently hidden in the language selector until translations are finalized.
+
+## Feedback / support
+
+- GitHub issues: https://github.com/NooraWael/toastmasters-agenda/issues
+- Email: nooraqasimwork@gmail.com
+- LinkedIn: https://www.linkedin.com/in/nooraqasim
+
+## Deployment
+
+Standard Next.js deployment (e.g., Vercel). Build with `npm run build` and serve with `npm run start`.
