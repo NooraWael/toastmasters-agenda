@@ -13,13 +13,17 @@ import {
   Speaker,
 } from '@/types/agenda';
 import { useEffect, useState } from 'react';
+import { getTranslations, Lang } from '@/lib/i18n';
 
 interface AgendaPreviewProps {
   data: AgendaData;
+  lang?: Lang;
 }
 
-export default function AgendaPreview({ data }: AgendaPreviewProps) {
+export default function AgendaPreview({ data, lang = 'en' }: AgendaPreviewProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const t = getTranslations(lang);
+  const isRTL = lang === 'ar';
 
   useEffect(() => {
     const check = () => setIsMobile(typeof window !== 'undefined' && window.innerWidth < 768);
@@ -28,16 +32,24 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
+    if (Number.isNaN(date.getTime())) return { day: '', date: '', month: '', year: '' };
+    const formatter = new Intl.DateTimeFormat(lang === 'ar' ? 'ar' : lang === 'hi' ? 'hi' : 'en', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const parts = formatter.formatToParts(date).reduce<Record<string, string>>((acc, part) => {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
     return {
-      day: dayNames[date.getDay()],
-      date: date.getDate(),
-      month: monthNames[date.getMonth()],
-      year: date.getFullYear(),
+      day: parts.weekday ?? '',
+      date: parts.day ?? '',
+      month: parts.month ?? '',
+      year: parts.year ?? '',
     };
   };
 
@@ -86,7 +98,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
-        Prepared Speeches {segment.startTime && `• ${formatTime(segment.startTime)}`}
+        {t.labels.preparedSpeeches} {segment.startTime && `• ${formatTime(segment.startTime)}`}
       </div>
       {/* Header Row */}
       <div style={{ 
@@ -98,10 +110,10 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         fontSize: '8px', 
         textTransform: 'uppercase'
       }}>
-        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>Project</div>
-        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>Speaker</div>
-        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>Speech Title</div>
-        <div style={{ padding: '6px 8px' }}>Evaluator</div>
+        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>{t.labels.project}</div>
+        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>{t.labels.speakerName}</div>
+        <div style={{ padding: '6px 8px', borderRight: '0.5px solid rgba(255,255,255,0.3)' }}>{t.labels.speechTitle}</div>
+        <div style={{ padding: '6px 8px' }}>{t.labels.evaluator}</div>
       </div>
       {/* Speaker Rows */}
       {segment.speakers.map((speaker: Speaker) => (
@@ -169,7 +181,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
-        Impromptu Speeches {segment.startTime && `• ${formatTime(segment.startTime)}`}
+        {t.labels.tableTopics} {segment.startTime && `• ${formatTime(segment.startTime)}`}
       </div>
       <div style={{ 
         background: '#d4d8d8', 
@@ -189,7 +201,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
           textTransform: 'uppercase', 
           lineHeight: '1.2'
         }}>
-          Table<br />Topics<br />Master
+          {t.labels.tableTopicsMaster}
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ 
@@ -198,12 +210,12 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
             fontWeight: 700,
             marginBottom: '6px'
           }}>
-            {segment.tableTopicsMaster}
-          </div>
-          <div style={{ 
-            fontSize: '9.5px', 
-            color: '#004165', 
-            lineHeight: '1.35'
+          {segment.tableTopicsMaster}
+        </div>
+        <div style={{ 
+          fontSize: '9.5px', 
+          color: '#004165', 
+          lineHeight: '1.35'
           }}>
             {segment.description}
           </div>
@@ -281,7 +293,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
-        Evaluation Segment {segment.startTime && `• ${formatTime(segment.startTime)}`}
+        {t.labels.evaluation} {segment.startTime && `• ${formatTime(segment.startTime)}`}
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '55px 1fr' }}>
         {/* GE column spanning full height */}
@@ -347,7 +359,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
         letterSpacing: '0em',
         lineHeight: '1.3'
       }}>
-        Meeting Adjournment {segment.startTime && `• ${formatTime(segment.startTime)}`}
+        {t.labels.adjournment} {segment.startTime && `• ${formatTime(segment.startTime)}`}
       </div>
       {segment.activities.map((activity: SegmentActivity, idx: number) => (
         <div key={activity.id} style={{ 
@@ -399,7 +411,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
       margin: '0 auto',
       overflow: 'hidden'
     }}>
-      <div className="agenda-wrapper">
+      <div className="agenda-wrapper" dir={isRTL ? 'rtl' : 'ltr'}>
         <div className="agenda-page">
           {/* Top decorative bar */}
           <div style={{ height: '3px', background: 'linear-gradient(90deg, #006094 0%, #014165 100%)' }} />
@@ -445,13 +457,13 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   {hasSupporter && (
                     <p style={{ 
                       fontSize: '10.5px', 
-                      color: '#000', 
-                      textTransform: 'uppercase',
-                      lineHeight: '1.15'
-                    }}>
-                      Supported by<br />{supporterName}
-                    </p>
-                  )}
+                  color: '#000', 
+                  textTransform: 'uppercase',
+                  lineHeight: '1.15'
+                }}>
+                  {t.preview.supportedBy}<br />{supporterName}
+                </p>
+              )}
                 </div>
               </div>
 
@@ -504,8 +516,8 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
               </div>
               {!isMobile && (
                 <div style={{ textAlign: 'center' }}>
-                  Meeting Commencement - {formatTime(data.startTime)}<br />
-                  Meeting Adjournment - {formatTime(data.endTime)}
+                  {t.preview.meetingCommencement} - {formatTime(data.startTime)}<br />
+                  {t.preview.meetingAdjournment} - {formatTime(data.endTime)}
                 </div>
               )}
               <div style={{ textAlign: isMobile ? 'center' : 'right' }}>
@@ -514,7 +526,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                     {supporterName}{!isMobile && ','}<br />
                   </>
                 )}
-                {data.location}
+                {t.preview.location}: {data.location}
               </div>
             </div>
           </div>
@@ -545,7 +557,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   letterSpacing: '0em',
                   lineHeight: '1.3'
                 }}>
-                  Executive Committee
+                  {t.preview.executiveCommittee}
                 </div>
                 {data.executiveCommittee.map((member, idx) => (
                   <div key={member.id} style={{ 
@@ -596,7 +608,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   letterSpacing: '0em',
                   lineHeight: '1.3'
                 }}>
-                  Role-Players
+                  {t.preview.rolePlayers}
                 </div>
                 {data.rolePlayers.map((role, idx) => (
                   <div key={role.id} style={{ 
@@ -645,7 +657,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   letterSpacing: '0em',
                   lineHeight: '1.3'
                 }}>
-                  Timing Criteria
+                  {t.labels.timingCriteria}
                 </div>
                 {data.timingCriteria.map((timing, idx) => (
                   <div key={timing.category} style={{ 
@@ -662,7 +674,16 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                       display: 'inline-block',
                       lineHeight: '1'
                     }}>
-                      {timing.category}
+                      {(() => {
+                        const map = {
+                          'ICE-BREAKER': t.labels.timingTitles.iceBreaker,
+                          'PREPARED SPEECHES': t.labels.timingTitles.preparedSpeeches,
+                          'WORKSHOPS/TRAININGS': t.labels.timingTitles.workshops,
+                          'EVALUATIONS': t.labels.timingTitles.evaluations,
+                          'TABLE TOPIC SPEECHES': t.labels.timingTitles.tableTopics,
+                        } as Record<string, string>;
+                        return map[timing.category] || timing.category;
+                      })()}
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2px' }}>
                       <div style={{ 
@@ -717,7 +738,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   lineHeight: '1.3',
                   textAlign: 'center'
                 }}>
-                  Theme
+                  {t.labels.theme}
                 </div>
                 <div style={{ 
                   background: '#004165', 
@@ -745,11 +766,11 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   textTransform: 'uppercase',
                   fontSize: '7.5px',
                   letterSpacing: '0em',
-                  lineHeight: '1.3',
-                  textAlign: 'center'
-                }}>
-                  Meeting #
-                </div>
+                lineHeight: '1.3',
+                textAlign: 'center'
+              }}>
+                  {t.preview.meetingNumberShort}
+              </div>
                 <div style={{ 
                   background: '#004165', 
                   color: '#fff', 
@@ -777,7 +798,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   lineHeight: '1.3',
                   textAlign: 'center'
                 }}>
-                  Word of the Day
+                  {t.labels.wordOfDay}
                 </div>
                 <div style={{ 
                   background: '#a9b2b1', 
@@ -807,7 +828,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   lineHeight: '1.3',
                   textAlign: 'center'
                 }}>
-                  Reboot Club Team
+                  {t.labels.clubTeam}
                 </div>
                 {data.clubTeam.map((member, idx) => (
                   <div key={member.id} style={{ 
@@ -856,7 +877,7 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
                   letterSpacing: '0em',
                   lineHeight: '1.3'
                 }}>
-                  Opening Sequence
+                  {t.preview.openingSequence}
                 </div>
                 {data.openingItems.map((item, idx) => (
                   <div key={item.id} style={{ 
@@ -914,11 +935,11 @@ export default function AgendaPreview({ data }: AgendaPreviewProps) {
               textTransform: 'uppercase',
               fontSize: '7.5px',
               marginBottom: '3px',
-              color: '#f2df74',
-              letterSpacing: '0em'
-            }}>
-              Club Mission
-            </div>
+          color: '#f2df74',
+          letterSpacing: '0em'
+        }}>
+          {t.preview.clubMission}
+        </div>
             <div style={{ 
               fontSize: '9.5px', 
               lineHeight: '1.35',

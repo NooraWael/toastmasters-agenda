@@ -7,14 +7,17 @@ import TableTopicsEditor from './segments/TableTopicsEditor';
 import BreakEditor from './segments/BreakEditor';
 import EvaluationEditor from './segments/EvaluationEditor';
 import AdjournmentEditor from './segments/AdjournmentEditor';
+import { getTranslations, Lang } from '@/lib/i18n';
 
 interface AgendaFormProps {
   data: AgendaData;
   onChange: (data: AgendaData) => void;
+  lang?: Lang;
 }
 
-export default function AgendaForm({ data, onChange }: AgendaFormProps) {
+export default function AgendaForm({ data, onChange, lang = 'en' }: AgendaFormProps) {
   const [editingSegmentId, setEditingSegmentId] = useState<string | null>(null);
+  const t = getTranslations(lang).labels;
 
   const updateField = <K extends keyof AgendaData>(field: K, value: AgendaData[K]) => {
     onChange({ ...data, [field]: value });
@@ -196,11 +199,11 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
   const getSegmentTitle = (type: Segment['type']) => {
     const titles = {
-      prepared_speeches: 'Prepared Speeches',
-      table_topics: 'Table Topics',
-      break: 'Break',
-      evaluation: 'Evaluation Segment',
-      adjournment: 'Meeting Adjournment'
+      prepared_speeches: t.preparedSpeeches,
+      table_topics: t.tableTopics,
+      break: t.break,
+      evaluation: t.evaluation,
+      adjournment: t.adjournment
     };
     return titles[type];
   };
@@ -234,36 +237,36 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
         {/* Club Information */}
         <div className={sectionWrapperClass}>
           <section className={sectionClass} style={sectionPadding}>
-            <h2 className={sectionTitleClass}>Club Information</h2>
-            <p className={sectionSubtitleClass}>Club name, supporter, and logos</p>
+            <h2 className={sectionTitleClass}>{t.clubInfoTitle}</h2>
+            <p className={sectionSubtitleClass}>{t.clubInfoSubtitle}</p>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               <div>
-                <label className={labelClass}>Club Name</label>
+                <label className={labelClass}>{t.clubName}</label>
                 <input
                   type="text"
                   value={data.clubName}
                   onChange={(e) => updateField('clubName', e.target.value)}
                   className={inputClass}
-                  placeholder="Enter club name"
+                  placeholder={t.clubName}
                 />
               </div>
 
               <div>
-                <label className={labelClass}>Supported By</label>
+                <label className={labelClass}>{t.supportedBy}</label>
                 <input
                   type="text"
                   value={data.clubSupporter}
                   onChange={(e) => updateField('clubSupporter', e.target.value)}
                   className={inputClass}
-                  placeholder="Sponsor or partner"
+                  placeholder={t.supportedBy}
                 />
               </div>
             </div>
 
           <div className="grid grid-cols-1 gap-8">
             <div className="space-y-3">
-              <label className={labelClass}>Supporter Logo <span className="text-gray-400 text-sm font-normal">(optional)</span></label>
+              <label className={labelClass}>{t.supporterLogo} <span className="text-gray-400 text-sm font-normal">{t.optional}</span></label>
               <div className="flex items-center gap-3">
                 <input
                   type="file"
@@ -289,12 +292,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
         {/* Meeting Details */}
         <div className={sectionWrapperClass}>
           <section className={sectionClass} style={sectionPadding}>
-            <h2 className={sectionTitleClass}>Meeting Details</h2>
-            <p className={sectionSubtitleClass}>Date, time, location, and theme</p>
+            <h2 className={sectionTitleClass}>{t.meetingDetailsTitle}</h2>
+            <p className={sectionSubtitleClass}>{t.meetingDetailsSubtitle}</p>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
               <div>
-                <label className={labelClass}>Meeting Number</label>
+                <label className={labelClass}>{t.meetingNumber}</label>
                 <input
                   type="text"
                   value={data.meetingNumber}
@@ -305,7 +308,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
 
               <div className="lg:col-span-2">
-                <label className={labelClass}>Meeting Date</label>
+                <label className={labelClass}>{t.meetingDate}</label>
                 <input
                   type="date"
                   value={data.meetingDate}
@@ -317,7 +320,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               <div>
-                <label className={labelClass}>Start Time</label>
+                <label className={labelClass}>{t.startTime}</label>
                 <input
                   type="time"
                   value={data.startTime}
@@ -327,7 +330,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
 
               <div>
-                <label className={labelClass}>End Time</label>
+                <label className={labelClass}>{t.endTime}</label>
                 <input
                   type="time"
                   value={data.endTime}
@@ -338,7 +341,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
             </div>
 
             <div className="mb-8">
-              <label className={labelClass}>Location</label>
+              <label className={labelClass}>{t.location}</label>
               <input
                 type="text"
                 value={data.location}
@@ -350,7 +353,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <label className={labelClass}>Theme</label>
+                <label className={labelClass}>{t.theme}</label>
                 <input
                   type="text"
                   value={data.theme}
@@ -361,7 +364,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
               </div>
 
               <div>
-                <label className={labelClass}>Word of the Day</label>
+                <label className={labelClass}>{t.wordOfDay}</label>
                 <input
                   type="text"
                   value={data.wordOfDay}
@@ -379,14 +382,14 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
           <section className={`${sectionClass} mt-12`} style={sectionPadding}>
             <div className="flex items-end justify-between mb-8">
               <div>
-                <h2 className={sectionTitleClass}>Executive Committee</h2>
-                <p className={sectionSubtitleClass}>Leadership team and officers</p>
+                <h2 className={sectionTitleClass}>{t.executiveCommitteeTitle}</h2>
+                <p className={sectionSubtitleClass}>{t.executiveCommitteeSubtitle}</p>
               </div>
               <button
                 onClick={addExecutiveMember}
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add Member
+                {t.addMember}
               </button>
             </div>
 
@@ -405,23 +408,23 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
-                      <label className={labelClass}>Role</label>
+                      <label className={labelClass}>{t.description}</label>
                       <input
                         type="text"
                         value={member.role}
                         onChange={(e) => updateExecutiveMember(member.id, 'role', e.target.value)}
                         className={inputClass}
-                        placeholder="Role"
+                        placeholder={t.description}
                       />
                     </div>
                     <div>
-                      <label className={labelClass}>Name</label>
+                      <label className={labelClass}>{t.person}</label>
                       <input
                         type="text"
                         value={member.name}
                         onChange={(e) => updateExecutiveMember(member.id, 'name', e.target.value)}
                         className={inputClass}
-                        placeholder="Name"
+                        placeholder={t.person}
                       />
                     </div>
                   </div>
@@ -430,12 +433,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
               {data.executiveCommittee.length === 0 && (
                 <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-                  <p className="text-slate-500 mb-4 text-base">No members added yet</p>
+                  <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
                   <button
                     onClick={addExecutiveMember}
                     className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
-                    Add First Member
+                    {t.addFirst} {t.addMember}
                   </button>
                 </div>
               )}
@@ -448,14 +451,14 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
           <section className={sectionClass} style={sectionPadding}>
             <div className="flex items-end justify-between mb-8">
               <div>
-                <h2 className={sectionTitleClass}>Role Players</h2>
-                <p className={sectionSubtitleClass}>TMOD, Timer, Grammarian, and others</p>
+                <h2 className={sectionTitleClass}>{t.rolePlayersTitle}</h2>
+                <p className={sectionSubtitleClass}>{t.rolePlayersSubtitle}</p>
               </div>
               <button
                 onClick={addRolePlayer}
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add Role
+                {t.addRole}
               </button>
             </div>
 
@@ -474,23 +477,23 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
-                      <label className={labelClass}>Role</label>
+                      <label className={labelClass}>{t.description}</label>
                       <input
                         type="text"
                         value={role.role}
                         onChange={(e) => updateRolePlayer(role.id, 'role', e.target.value)}
                         className={inputClass}
-                        placeholder="Role"
+                        placeholder={t.description}
                       />
                     </div>
                     <div>
-                      <label className={labelClass}>Name</label>
+                      <label className={labelClass}>{t.person}</label>
                       <input
                         type="text"
                         value={role.name}
                         onChange={(e) => updateRolePlayer(role.id, 'name', e.target.value)}
                         className={inputClass}
-                        placeholder="Name"
+                        placeholder={t.person}
                       />
                     </div>
                   </div>
@@ -499,12 +502,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
               {data.rolePlayers.length === 0 && (
                 <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-                  <p className="text-slate-500 mb-4 text-base">No roles added yet</p>
+                  <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
                   <button
                     onClick={addRolePlayer}
                     className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
-                    Add First Role
+                    {t.addFirst} {t.addRole}
                   </button>
                 </div>
               )}
@@ -517,14 +520,14 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
           <section className={sectionClass} style={sectionPadding}>
             <div className="flex items-end justify-between mb-8">
               <div>
-                <h2 className={sectionTitleClass}>Opening Sequence</h2>
-                <p className={sectionSubtitleClass}>Welcome and opening activities</p>
+                <h2 className={sectionTitleClass}>{t.openingSequenceTitle}</h2>
+                <p className={sectionSubtitleClass}>{t.openingSequenceSubtitle}</p>
               </div>
               <button
                 onClick={addOpeningItem}
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add Item
+                {t.addActivity}
               </button>
             </div>
 
@@ -543,7 +546,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div>
-                      <label className={labelClass}>Time</label>
+                      <label className={labelClass}>{t.startTime}</label>
                       <input
                         type="time"
                         value={item.time}
@@ -552,23 +555,23 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                       />
                     </div>
                     <div>
-                      <label className={labelClass}>Activity</label>
+                      <label className={labelClass}>{t.description}</label>
                       <input
                         type="text"
                         value={item.item}
                         onChange={(e) => updateOpeningItem(item.id, 'item', e.target.value)}
                         className={inputClass}
-                        placeholder="Activity"
+                        placeholder={t.description}
                       />
                     </div>
                     <div>
-                      <label className={labelClass}>Person</label>
+                      <label className={labelClass}>{t.person}</label>
                       <input
                         type="text"
                         value={item.person}
                         onChange={(e) => updateOpeningItem(item.id, 'person', e.target.value)}
                         className={inputClass}
-                        placeholder="Person"
+                        placeholder={t.person}
                       />
                     </div>
                   </div>
@@ -577,12 +580,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
               {data.openingItems.length === 0 && (
                 <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-                  <p className="text-slate-500 mb-4 text-base">No items added yet</p>
+                  <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
                   <button
                     onClick={addOpeningItem}
                     className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
-                    Add First Item
+                    {t.addFirst} {t.addActivity}
                   </button>
                 </div>
               )}
@@ -595,7 +598,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
           <section className={sectionClass} style={sectionPadding}>
             <div className="flex items-end justify-between mb-8">
               <div>
-                <h2 className={sectionTitleClass}>Meeting Segments</h2>
+                <h2 className={sectionTitleClass}>{t.meetingSegmentsTitle}</h2>
                 <p className={sectionSubtitleClass}>Speeches, topics, breaks, evaluation</p>
               </div>
               <select
@@ -608,12 +611,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors cursor-pointer shadow-sm"
                 defaultValue=""
               >
-                <option value="" disabled>Add Segment</option>
-                <option value="prepared_speeches">Prepared Speeches</option>
-                <option value="table_topics">Table Topics</option>
-                <option value="break">Break</option>
-                <option value="evaluation">Evaluation</option>
-                <option value="adjournment">Adjournment</option>
+                <option value="" disabled>{t.addActivity}</option>
+                <option value="prepared_speeches">{t.preparedSpeeches}</option>
+                <option value="table_topics">{t.tableTopics}</option>
+                <option value="break">{t.break}</option>
+                <option value="evaluation">{t.evaluation}</option>
+                <option value="adjournment">{t.adjournment}</option>
               </select>
             </div>
 
@@ -670,19 +673,19 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                     {editingSegmentId === segment.id && (
                       <div className="mt-6 pt-6 border-t border-slate-200">
                         {segment.type === 'prepared_speeches' && (
-                          <PreparedSpeechesEditor segment={segment} onUpdate={updateSegment} />
+                          <PreparedSpeechesEditor segment={segment} onUpdate={updateSegment} t={t} />
                         )}
                         {segment.type === 'table_topics' && (
-                          <TableTopicsEditor segment={segment} onUpdate={updateSegment} />
+                          <TableTopicsEditor segment={segment} onUpdate={updateSegment} t={t} />
                         )}
                         {segment.type === 'break' && (
-                          <BreakEditor segment={segment} onUpdate={updateSegment} />
+                          <BreakEditor segment={segment} onUpdate={updateSegment} t={t} />
                         )}
                         {segment.type === 'evaluation' && (
-                          <EvaluationEditor segment={segment} onUpdate={updateSegment} />
+                          <EvaluationEditor segment={segment} onUpdate={updateSegment} t={t} />
                         )}
                         {segment.type === 'adjournment' && (
-                          <AdjournmentEditor segment={segment} onUpdate={updateSegment} />
+                          <AdjournmentEditor segment={segment} onUpdate={updateSegment} t={t} />
                         )}
                       </div>
                     )}
@@ -692,7 +695,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
               {data.segments.length === 0 && (
                 <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-                  <p className="text-slate-500 mb-4 text-base">No segments added yet</p>
+                  <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
                 </div>
               )}
             </div>
@@ -711,7 +714,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                 onClick={addClubTeamMember}
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add Member
+                {t.addMember}
               </button>
             </div>
 
@@ -730,23 +733,23 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
                   
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
-                      <label className={labelClass}>Role</label>
+                      <label className={labelClass}>{t.description}</label>
                       <input
                         type="text"
                         value={member.role}
                         onChange={(e) => updateClubTeamMember(member.id, 'role', e.target.value)}
                         className={inputClass}
-                        placeholder="Role"
+                        placeholder={t.description}
                       />
                     </div>
                     <div>
-                      <label className={labelClass}>Name</label>
+                      <label className={labelClass}>{t.person}</label>
                       <input
                         type="text"
                         value={member.name}
                         onChange={(e) => updateClubTeamMember(member.id, 'name', e.target.value)}
                         className={inputClass}
-                        placeholder="Name"
+                        placeholder={t.person}
                       />
                     </div>
                   </div>
@@ -755,12 +758,12 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
 
               {data.clubTeam.length === 0 && (
                 <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-                  <p className="text-slate-500 mb-4 text-base">No members added yet</p>
+                  <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
                   <button
                     onClick={addClubTeamMember}
                     className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
                   >
-                    Add First Member
+                    {t.addFirst} {t.addMember}
                   </button>
                 </div>
               )}
@@ -775,7 +778,7 @@ export default function AgendaForm({ data, onChange }: AgendaFormProps) {
             <p className={sectionSubtitleClass}>Club mission and values</p>
             
             <div>
-              <label className={labelClass}>Club Mission Statement</label>
+              <label className={labelClass}>{t.clubMission}</label>
               <textarea
                 value={data.clubMission}
                 onChange={(e) => updateField('clubMission', e.target.value)}

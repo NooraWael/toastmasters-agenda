@@ -1,13 +1,15 @@
 'use client';
 
 import { BreakSegment } from '@/types/agenda';
+import { Translations } from '@/lib/i18n';
 
 interface BreakEditorProps {
   segment: BreakSegment;
   onUpdate: (segment: BreakSegment) => void;
+  t: Translations['labels'];
 }
 
-export default function BreakEditor({ segment, onUpdate }: BreakEditorProps) {
+export default function BreakEditor({ segment, onUpdate, t }: BreakEditorProps) {
   const updateField = <K extends keyof BreakSegment>(field: K, value: BreakSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
@@ -19,7 +21,7 @@ export default function BreakEditor({ segment, onUpdate }: BreakEditorProps) {
   return (
     <div>
       <div className="mb-10">
-        <label className={labelClass}>Start Time</label>
+        <label className={labelClass}>{t.startTime}</label>
         <input
           type="time"
           value={segment.startTime}
@@ -30,7 +32,7 @@ export default function BreakEditor({ segment, onUpdate }: BreakEditorProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <div>
-          <label className={labelClass}>Break Title</label>
+          <label className={labelClass}>{t.title}</label>
           <input
             type="text"
             value={segment.title}
@@ -42,7 +44,7 @@ export default function BreakEditor({ segment, onUpdate }: BreakEditorProps) {
         </div>
 
         <div>
-          <label className={labelClass}>Duration</label>
+          <label className={labelClass}>{t.duration}</label>
           <input
             type="text"
             value={segment.duration}
@@ -56,7 +58,7 @@ export default function BreakEditor({ segment, onUpdate }: BreakEditorProps) {
 
       <div>
         <label className={labelClass}>
-          Description <span className="text-gray-400 text-sm font-normal">(optional)</span>
+          {t.description} <span className="text-gray-400 text-sm font-normal">{t.optional}</span>
         </label>
         <textarea
           value={segment.description}

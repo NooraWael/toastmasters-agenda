@@ -1,13 +1,15 @@
 'use client';
 
 import { PreparedSpeechesSegment, Speaker } from '@/types/agenda';
+import { Translations } from '@/lib/i18n';
 
 interface PreparedSpeechesEditorProps {
   segment: PreparedSpeechesSegment;
   onUpdate: (segment: PreparedSpeechesSegment) => void;
+  t: Translations['labels'];
 }
 
-export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSpeechesEditorProps) {
+export default function PreparedSpeechesEditor({ segment, onUpdate, t }: PreparedSpeechesEditorProps) {
   const updateField = <K extends keyof PreparedSpeechesSegment>(field: K, value: PreparedSpeechesSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
@@ -41,7 +43,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
   return (
     <div>
       <div className="mb-10">
-        <label className={labelClass}>Start Time</label>
+        <label className={labelClass}>{t.startTime}</label>
         <input
           type="time"
           value={segment.startTime}
@@ -57,7 +59,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
             onClick={addSpeaker}
             className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
           >
-            Add Speaker
+            {t.addSpeaker}
           </button>
         </div>
         
@@ -76,7 +78,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div>
-                  <label className={labelClass}>Level</label>
+                  <label className={labelClass}>{t.level}</label>
                   <input
                     type="text"
                     value={speaker.level}
@@ -86,7 +88,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Speaker Name</label>
+                  <label className={labelClass}>{t.speakerName}</label>
                   <input
                     type="text"
                     value={speaker.name}
@@ -96,7 +98,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Speech Title</label>
+                  <label className={labelClass}>{t.speechTitle}</label>
                   <input
                     type="text"
                     value={speaker.title}
@@ -106,7 +108,7 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Evaluator</label>
+                  <label className={labelClass}>{t.evaluator}</label>
                   <input
                     type="text"
                     value={speaker.evaluator}
@@ -121,12 +123,12 @@ export default function PreparedSpeechesEditor({ segment, onUpdate }: PreparedSp
 
           {segment.speakers.length === 0 && (
             <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-              <p className="text-slate-500 mb-4 text-base">No speakers added yet</p>
+              <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
               <button
                 onClick={addSpeaker}
                 className="px-6 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add First Speaker
+                {t.addFirst} {t.addSpeaker}
               </button>
             </div>
           )}

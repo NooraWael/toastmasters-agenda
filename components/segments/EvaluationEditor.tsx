@@ -1,13 +1,15 @@
 'use client';
 
 import { EvaluationSegment, SegmentActivity } from '@/types/agenda';
+import { Translations } from '@/lib/i18n';
 
 interface EvaluationEditorProps {
   segment: EvaluationSegment;
   onUpdate: (segment: EvaluationSegment) => void;
+  t: Translations['labels'];
 }
 
-export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditorProps) {
+export default function EvaluationEditor({ segment, onUpdate, t }: EvaluationEditorProps) {
   const updateField = <K extends keyof EvaluationSegment>(field: K, value: EvaluationSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
@@ -41,7 +43,7 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         <div>
-          <label className={labelClass}>Start Time</label>
+          <label className={labelClass}>{t.startTime}</label>
           <input
             type="time"
             value={segment.startTime}
@@ -51,7 +53,7 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
         </div>
 
         <div>
-          <label className={labelClass}>General Evaluator</label>
+          <label className={labelClass}>{t.generalEvaluator}</label>
           <input
             type="text"
             value={segment.generalEvaluator}
@@ -64,12 +66,12 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
 
       <div className="border-t border-slate-200 pt-10">
         <div className="flex items-center justify-between mb-8">
-          <h3 className="text-xl font-semibold text-slate-900">Evaluation Activities</h3>
+          <h3 className="text-xl font-semibold text-slate-900">{t.evaluation}</h3>
           <button
             onClick={addActivity}
             className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
           >
-            Add Activity
+            {t.addActivity}
           </button>
         </div>
         
@@ -88,7 +90,7 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
               
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div>
-                  <label className={labelClass}>Time <span className="text-gray-400 text-sm font-normal">(optional)</span></label>
+                  <label className={labelClass}>{t.startTime} <span className="text-gray-400 text-sm font-normal">{t.optional}</span></label>
                   <input
                     type="time"
                     value={activity.time}
@@ -97,7 +99,7 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Role</label>
+                  <label className={labelClass}>{t.description}</label>
                   <input
                     type="text"
                     value={activity.description}
@@ -107,7 +109,7 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
                   />
                 </div>
                 <div>
-                  <label className={labelClass}>Person</label>
+                  <label className={labelClass}>{t.person}</label>
                   <input
                     type="text"
                     value={activity.person}
@@ -122,12 +124,12 @@ export default function EvaluationEditor({ segment, onUpdate }: EvaluationEditor
 
           {segment.activities.length === 0 && (
             <div className="text-center py-12 border border-dashed border-slate-200 rounded-xl bg-white">
-              <p className="text-slate-500 mb-4 text-base">No activities added yet</p>
+              <p className="text-slate-500 mb-4 text-base">{t.noItems}</p>
               <button
                 onClick={addActivity}
                 className="px-5 py-3 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors shadow-sm"
               >
-                Add First Activity
+                {t.addFirst} {t.addActivity}
               </button>
             </div>
           )}

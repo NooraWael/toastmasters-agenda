@@ -108,3 +108,16 @@ body {
   body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .no-print { display: none !important; }
 }
+
+/* RTL helpers driven by body.rtl (set by language selector) */
+.rtl {
+  direction: rtl;
+}
+
+.rtl .agenda-grid {
+  direction: rtl;
+}
+
+.rtl .agenda-grid > * {
+  direction: ltr;
+}

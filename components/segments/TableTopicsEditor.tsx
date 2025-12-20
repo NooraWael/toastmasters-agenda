@@ -1,13 +1,15 @@
 'use client';
 
 import { TableTopicsSegment } from '@/types/agenda';
+import { Translations } from '@/lib/i18n';
 
 interface TableTopicsEditorProps {
   segment: TableTopicsSegment;
   onUpdate: (segment: TableTopicsSegment) => void;
+  t: Translations['labels'];
 }
 
-export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEditorProps) {
+export default function TableTopicsEditor({ segment, onUpdate, t }: TableTopicsEditorProps) {
   const updateField = <K extends keyof TableTopicsSegment>(field: K, value: TableTopicsSegment[K]) => {
     onUpdate({ ...segment, [field]: value });
   };
@@ -19,7 +21,7 @@ export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEdit
   return (
     <div>
       <div className="mb-10">
-        <label className={labelClass}>Start Time</label>
+        <label className={labelClass}>{t.startTime}</label>
         <input
           type="time"
           value={segment.startTime}
@@ -29,7 +31,7 @@ export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEdit
       </div>
 
       <div className="mb-10">
-        <label className={labelClass}>Table Topics Master</label>
+        <label className={labelClass}>{t.tableTopicsMaster}</label>
         <input
           type="text"
           value={segment.tableTopicsMaster}
@@ -39,9 +41,9 @@ export default function TableTopicsEditor({ segment, onUpdate }: TableTopicsEdit
         />
       </div>
 
-      <div>
-        <label className={labelClass}>
-          Description <span className="text-gray-400 text-sm font-normal">(optional)</span>
+    <div>
+      <label className={labelClass}>
+          {t.description} <span className="text-gray-400 text-sm font-normal">{t.optional}</span>
         </label>
         <textarea
           value={segment.description}
